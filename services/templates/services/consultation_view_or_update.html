@@ -1,0 +1,15 @@
+{% extends "base_site.html" %}
+{% load i18n staticfiles %}
+
+{% block content %}
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'animal_search' %}">{% trans "Animals" %}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'consultation_list' consultation.animal_id %}">{% trans "Consultations" %}</a></li>
+            <li class="breadcrumb-item active">{{ consultation.animal.animal_name }}</li>
+        </ol>
+        {% include "services/consultation_new.html" %}
+    </div>
+{% endblock %}

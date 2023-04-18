@@ -1,0 +1,59 @@
+{% load i18n admin_static %}
+
+<form role="form" method="post">{% csrf_token %}
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Date" %} <b style="color: red;">*</b></label>
+                {{ vaccine_form.date }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Type" %} <b style="color: red;">*</b></label>
+                {{ vaccine_form.vaccine_type }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Lot" %}</label>
+                {{ vaccine_form.lot }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Booster" %}</label>
+                {{ vaccine_form.booster }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Note" %}</label>
+                {{ vaccine_form.note }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+
+    {% if creating %}
+        <button type="submit" name="action" value="save" class="btn btn-primary">{% trans "Save" %}</button>
+        {% if consultation %}
+            <a href="{% url 'consultation_view' consultation %}" class="btn btn-secondary">{% trans "Back" %}</a>
+        {% else %}
+            <a href="{% url 'vaccine_list' animal.id %}" class="btn btn-secondary">{% trans "Back" %}</a>
+        {% endif %}
+    {% elif editing %}
+        <button type="submit" name="action" value="save" class="btn btn-primary">{% trans "Save" %}</button>
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    {% elif viewing %}
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">{% trans "Back" %}</a>
+    {% endif %}
+</form>

@@ -1,0 +1,141 @@
+{% load i18n admin_static %}
+
+<form role="form" method="post">{% csrf_token %}
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Animal's Name" %} <b style="color: red;">*</b></label>
+                {{ animal_form.animal_name }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Owner" %} <b style="color: red;">*</b></label>
+                {{ animal_form.owner }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Specie" %} <b style="color: red;">*</b></label>
+                {{ animal_form.specie }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Breed" %} <b style="color: red;">*</b></label>
+                {{ animal_form.breed }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Gender" %}</label>
+                {{ animal_form.sex }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Birthdate" %}</label>
+                {{ animal_form.birthdate }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Color" %}</label>
+                {{ animal_form.color }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Fur" %}</label>
+                {{ animal_form.fur }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Microchip" %}</label>
+                {{ animal_form.microchip }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Dead" %}</label>
+                {{ animal_form.dead }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Spay or Neuter" %}</label>
+                {{ animal_form.spay_neuter }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "When?" %}</label>
+                {{ animal_form.spay_neuter_date }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Note" %}</label>
+                {{ animal_form.note }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+
+    {% if creating %}
+        <button type="submit" name="action" value="save" class="btn btn-primary">{% trans "Save" %}</button>
+        <a href="{% url 'animal_search' %}" class="btn btn-secondary">{% trans "Back" %}</a>
+    {% elif editing %}
+        <button type="submit" name="action" value="save" class="btn btn-primary">{% trans "Save" %}</button>
+        <a href="{% url 'animal_view' animal.id %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    {% elif viewing %}
+        <a href="{% url 'animal_edit' animal.id %}" class="btn btn-primary" style="margin-left: 5px">{% trans "Edit" %}</a>
+        <a href="{% url 'animal_search' %}" class="btn btn-secondary">{% trans "Back" %}</a>
+        <button type="button" class="btn btn-danger float-right" onclick="showDialogAndEnableRemoveButton()">{% trans "Delete" %}</button>
+    {% else %}
+        <a href="{% url 'animal_search' %}" class="btn btn-secondary">{% trans "Back" %}</a>
+    {% endif %}
+
+    <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{% trans "Delete animal" %}</h5>
+                </div>
+                <div class="modal-body">
+                    {% trans "Are you sure you want to delete " %}{{ animal.animal_name }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="disableRemoveButton()">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-danger" id="remove_button" value="remove" disabled name="action">{% trans "Delete" %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,83 @@
+{% load i18n admin_static %}
+
+{% block extrahead %}
+    <script src="{% static 'services/js/exam.js' %}"></script>
+{% endblock %}
+
+<form role="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Date" %} <b style="color: red;">*</b></label>
+                {{ exam_form.date }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Type" %} <b style="color: red;">*</b></label>
+                {{ exam_form.exam_type }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px">
+        <div class="col-12">
+            <label class="control-label">{% trans "Exams" %} <b style="color: red;">*</b></label>
+        </div>
+        <div class="col-5">
+            <select name="from" id="multiselect" class="form-control" size="8" multiple="multiple"
+                    {% if viewing %}disabled{% endif %}>
+                {% for exam in exams %}
+                    <option value="{{ exam.id }}">{{ exam }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-2 text-center">
+            <button type="button" id="multiselect_rightAll" class="btn btn-secondary" style="margin-bottom: 3px"> >> </button><br>
+            <button type="button" id="multiselect_rightSelected" class="btn btn-secondary" style="margin-bottom: 3px"> > </button><br>
+            <button type="button" id="multiselect_leftSelected" class="btn btn-secondary" style="margin-bottom: 3px"> < </button><br>
+            <button type="button" id="multiselect_leftAll" class="btn btn-secondary"> << </button>
+        </div>
+        <div class="col-5">
+            <select name="to" id="multiselect_to" class="form-control" size="8" multiple="multiple"
+                    {% if viewing %}disabled{% endif %}>
+                {% for exam in exams_selected %}
+                    <option value="{{ exam.id }}">{{ exam }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">{% trans "Note" %}</label>
+                {{ exam_form.note }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label" for="id_exam_file">{% trans "Files" %}</label><br>
+                {{ exam_form.exam_file }}
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+
+    {% if creating %}
+        <button type="submit" name="action" value="save" class="btn btn-primary">{% trans "Save" %}</button>
+        {% if consultation %}
+            <a href="{% url 'consultation_view' consultation %}" class="btn btn-secondary">{% trans "Back" %}</a>
+        {% else %}
+            <a href="{% url 'exam_list' animal.id %}" class="btn btn-secondary">{% trans "Back" %}</a>
+        {% endif %}
+    {% elif editing %}
+        <button type="submit" name="action" value="save" class="btn btn-primary">{% trans "Save" %}</button>
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    {% elif viewing %}
+        <a href="{% url 'client_service_list' exam.animal.owner.id %}" class="btn btn-secondary">{% trans "Back" %}</a>
+    {% endif %}
+</form>

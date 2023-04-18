@@ -1,0 +1,73 @@
+{% extends "base_site.html" %}
+{% load i18n admin_static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'report' %}">{% trans "Reports" %}</a></li>
+            <li class="breadcrumb-item active">{% trans "Vaccine booster list" %}</li>
+        </ol>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <form method="get">
+                    <div class="row">
+                        <div class="col-sm-5 col-12">
+                            <input type="text" name="booster_min" class="form-control datepicker" id="id_booster_0" placeholder="{% trans "Start date" %}">
+                        </div>
+                        <div class="col-sm-5 col-12">
+                           <input type="text" name="booster_max" class="form-control datepicker" id="id_booster_1" placeholder="{% trans "End date" %}">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" id="search" class="btn btn-primary">{% trans "Search" %}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                        <div class="row">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="w-15">{% trans "Date" %}</th>
+                                        <th class="w-20">{% trans "Animal's Name" %}</th>
+                                        <th class="w-15">{% trans "Type" %}</th>
+                                        <th class="w-20">{% trans "Owner" %}</th>
+                                        <th class="w-15">{% trans "Contact" %}</th>
+                                        <th class="w-15">{% trans "Action" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in vaccine_list.qs %}
+                                        <tr>
+                                            <td>{{ item.booster }}</td>
+                                            <td>{{ item.animal }}</td>
+                                            <td>{{ item.vaccine_type }}</td>
+                                            <td>{{ item.animal.owner }}</td>
+                                            <td>
+                                                {{ item.animal.owner.phone }}<br>
+                                                {{ item.animal.owner.cellphone }}
+                                            </td>
+                                            <td><a class="btn btn-primary"
+                                                   href="{% url 'vaccine_view' item.service_ptr_id %}">{% trans "See service" %}</a>
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="6"
+                                                class="text-center">{% trans "No vaccine booster found!" %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

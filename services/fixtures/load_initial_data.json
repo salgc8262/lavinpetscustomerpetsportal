@@ -1,0 +1,236 @@
+[
+  {
+    "model": "services.consultationtype",
+    "pk": 1,
+    "fields": {
+      "name": "Consulta",
+      "price": "260.00"
+    }
+  },
+  {
+    "model": "services.consultationtype",
+    "pk": 2,
+    "fields": {
+      "name": "Retorno",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 1,
+    "fields": {
+      "vaccine_for": 1,
+      "name": "V8 (Vanguard HTLP 5/CV-L)",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 2,
+    "fields": {
+      "vaccine_for": 1,
+      "name": "V10 (Vanguard plus)",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 3,
+    "fields": {
+      "vaccine_for": 1,
+      "name": "BronchiGuard",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 4,
+    "fields": {
+      "vaccine_for": 1,
+      "name": "Bronchi-Shield III",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 5,
+    "fields": {
+      "vaccine_for": 1,
+      "name": "Pneumodog",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 6,
+    "fields": {
+      "vaccine_for": 1,
+      "name": "GiardiaVax",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 7,
+    "fields": {
+      "vaccine_for": 2,
+      "name": "Tríplece felina (Felocell CVR)",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 8,
+    "fields": {
+      "vaccine_for": 2,
+      "name": "Quádrupla Felina (Felocell CVR-C)",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 9,
+    "fields": {
+      "vaccine_for": 2,
+      "name": "Quíntupla Felina (Fel-o-Vax LVK IV CaliciVax)",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.vaccinetype",
+    "pk": 10,
+    "fields": {
+      "vaccine_for": 2,
+      "name": "Defensor",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Análises Tegumentares"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Citopatologia"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Endocrinologia"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Hematologia"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Histopatologia"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Microbiologia"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Parasitologia"
+    }
+  },
+  {
+    "model": "services.examcategory",
+    "pk": 8,
+    "fields": {
+      "name": "Urinálise"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "Tricograma",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 2,
+    "fields": {
+      "category": 2,
+      "name": "Citologia de líquidos cavitários",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 3,
+    "fields": {
+      "category": 3,
+      "name": "Insulina",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 4,
+    "fields": {
+      "category": 4,
+      "name": "Contagem de Reticulócitos (2 a 5 ml de sangue)",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 5,
+    "fields": {
+      "category": 5,
+      "name": "Até 3 fragmentos",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 6,
+    "fields": {
+      "category": 6,
+      "name": "Cultura para fungo",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 7,
+    "fields": {
+      "category": 7,
+      "name": "Coproparasitologico (com citologia anal)",
+      "price": "0"
+    }
+  },
+  {
+    "model": "services.examname",
+    "pk": 8,
+    "fields": {
+      "category": 8,
+      "name": "Analise de cálculo urinário",
+      "price": "0"
+    }
+  }
+]

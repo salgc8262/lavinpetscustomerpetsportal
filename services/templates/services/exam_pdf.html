@@ -1,0 +1,85 @@
+{% load i18n staticfiles %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            @page {
+                size: a4 portrait;
+                margin: 4.5cm 2cm 2cm 2cm;
+                padding:0;
+
+                @frame header {
+                    -pdf-frame-content:header;
+                    top:0.5cm;
+                    left:2cm;
+                    right:2cm;
+                    height:3.5cm;
+                }
+
+                @frame footer {
+                    -pdf-frame-content:footer;
+                    bottom:1cm;
+                    left:2cm;
+                    right:2cm;
+                    height:1cm;
+                }
+            }
+            body {
+                all: unset;
+                line-height: 10px;
+                font-size: 16px;
+                text-align: justify;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div id="header" style="text-align: center">
+                {% if images.logo %}
+                    <img alt="Logo" src="{{ images.logo.url }}">
+                {% endif %}
+            </div>
+            {% if exam %}
+                <br>
+                <table width="100%" border="1" cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td colspan="2" style="background: lightgrey; text-align: center"><strong>{% trans "Animal data" %}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Animal's Name" %}: {{ exam.animal }}</td>
+                        <td>{% trans "Specie" %}: {{ exam.animal.specie }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Sex" %}: {{ exam.animal.get_sex_display }}</td>
+                        <td>{% trans "Age" %}: {% if exam.animal.age %}{{ exam.animal.age }}{% else %}<em>{% trans "not registered" %}</em>{% endif %}</td>
+                    </tr>
+                </table>
+                <br>
+                <p><strong>{% trans "Owner" %}:</strong> {{ exam.animal.owner }}</p>
+                <br>
+                <p>
+                    {% blocktrans %}
+                        Dear colleague,<br><br>
+                        I ask for the animal mentioned above the following exams:
+                    {% endblocktrans %}
+                </p>
+                <ul>
+                    {% for item in exam.exam_list.all %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                <br><br><br><br>
+                <p>S&atilde;o Paulo, {{ date }}.</p>
+                <br><br><br>
+                <p style="text-align: center">___________________________________________________</p>
+            {% else %}
+                {% trans "No exam found." %}
+            {% endif %}
+        </div>
+        <div id="footer" style="text-align: center">
+            {% if document.footer %}
+                {{ document.footer }}
+            {% endif %}
+        </div>
+    </body>
+</html>
